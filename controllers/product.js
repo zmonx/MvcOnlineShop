@@ -23,7 +23,11 @@ exports.insert = (req, res, next) => {
         pageTitle: '',
     });
 }
-
+exports.details = (req, res, next) => {
+    res.render('products/detail', {
+        pageTitle: '',
+    });
+}
 
 
 exports.getSearchProductByPhone = (req, res, next) => {

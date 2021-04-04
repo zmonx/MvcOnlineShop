@@ -16,6 +16,7 @@ router.get('/computer', productsController.getSearchProductByComputer);
 router.get('/smartphone', productsController.getSearchProductByPhone);
 router.get('/laptop', productsController.getSearchProductByLaptop);
 
+router.get('/detail', productsController.details);
 
 
 // router.get('/insert', productsController.getAddProduct);
