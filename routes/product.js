@@ -12,6 +12,11 @@ router.get('/', productsController.index);
 router.get('/insert', productsController.insert);
 
 router.get('/shop', productsController.getSearchProduct);
+router.get('/computer', productsController.getSearchProductByComputer);
+router.get('/smartphone', productsController.getSearchProductByPhone);
+router.get('/laptop', productsController.getSearchProductByLaptop);
+
+
 
 // router.get('/insert', productsController.getAddProduct);
 

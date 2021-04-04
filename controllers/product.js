@@ -2,6 +2,7 @@ const { validationResult } = require('express-validator')
 
 const mongodb = require('mongodb');
 const Product = require('../models/products');
+
 const ObjectId = mongodb.ObjectId;
 
 
@@ -25,7 +26,49 @@ exports.insert = (req, res, next) => {
 
 
 
+exports.getSearchProductByPhone = (req, res, next) => {
 
+    // category_name:"phone",
+
+
+
+    Product.fetchAll()
+        .then(products => { 
+            res.render('products/phone', {
+                pageTitle: 'Search phone',
+                prods: products,
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+exports.getSearchProductByLaptop = (req, res, next) => {
+
+    Product.fetchAll()
+        .then(products => {
+            res.render('products/laptop', {
+                pageTitle: 'Search laptop',
+                prods: products,
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+exports.getSearchProductByComputer = (req, res, next) => {
+
+    Product.fetchAll()
+        .then(products => {
+            res.render('products/computer', {
+                pageTitle: 'Search computer',
+                prods: products,
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
 
 exports.getSearchProduct = (req, res, next) => {
 

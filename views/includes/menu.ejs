@@ -73,7 +73,17 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="/">Home</a></li>
-                        <li><a href="#">Category</a></li>
+                        <div class="dropdown nav navbar-nav">
+                            <button class="btns dropdown-toggle " type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                CATEGORIES   
+                            <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="about-us">
+                            <li><a href="/smartphone">Smart phone</a></li>
+                            <li><a href="/computer">Computer</a></li>
+                            <li><a href="/laptop">Laptop</a></li>
+                            </ul>
+                            </div>
                         <li><a href="/shop">Shop page</a></li>
                         <li><a href="cart.html">Cart</a></li>
                         <li><a href="checkout.html">Checkout</a></li>
@@ -83,4 +93,27 @@
             </div>
         </div>
     </div> <!-- End mainmenu area -->
+    
+
+<style>
+    .btns{
+        display: inline-block;
+        padding:20px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-color: #fbfbfb;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+</style>
     
