@@ -47,7 +47,48 @@ class Products {
                 console.log(err);
             });
     }
-
+    static fetchAllByPhone() {
+        const db = getDb();
+        return db
+            .collection('products')
+            .find({category_name:"phone"})
+            .toArray()
+            .then(products => {
+                console.log(products);
+                return products;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+    static fetchAllByComputer() {
+        const db = getDb();
+        return db
+            .collection('products')
+            .find({category_name:"computer"})
+            .toArray()
+            .then(products => {
+                console.log(products);
+                return products;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+    static fetchAllByLaptop() {
+        const db = getDb();
+        return db
+            .collection('products')
+            .find({category_name:"laptop"})
+            .toArray()
+            .then(products => {
+                console.log(products);
+                return products;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
     static findById(prodId) {
         const db = getDb();
         return db

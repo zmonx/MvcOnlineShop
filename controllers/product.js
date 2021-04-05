@@ -36,7 +36,7 @@ exports.getSearchProductByPhone = (req, res, next) => {
 
 
 
-    Product.fetchAll()
+    Product.fetchAllByPhone()
         .then(products => { 
             res.render('products/phone', {
                 pageTitle: 'Search phone',
@@ -49,7 +49,7 @@ exports.getSearchProductByPhone = (req, res, next) => {
 }
 exports.getSearchProductByLaptop = (req, res, next) => {
 
-    Product.fetchAll()
+    Product.fetchAllByLaptop()
         .then(products => {
             res.render('products/laptop', {
                 pageTitle: 'Search laptop',
@@ -62,7 +62,7 @@ exports.getSearchProductByLaptop = (req, res, next) => {
 }
 exports.getSearchProductByComputer = (req, res, next) => {
 
-    Product.fetchAll()
+    Product.fetchAllByComputer()
         .then(products => {
             res.render('products/computer', {
                 pageTitle: 'Search computer',
