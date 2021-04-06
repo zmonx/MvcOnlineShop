@@ -15,13 +15,16 @@ router.get('/shop', productsController.getSearchProduct);
 router.get('/computer', productsController.getSearchProductByComputer);
 router.get('/smartphone', productsController.getSearchProductByPhone);
 router.get('/laptop', productsController.getSearchProductByLaptop);
+router.get('/product', productsController.getSearchProduct_edit);
+// router.get('/update', productsController.update);
+
 
 router.get('/:product_id', productsController.detailProduct);
 
 
 // router.get('/insert', productsController.getAddProduct);
 
-// router.get('/update/:product_id', productsController.getUpdateProduct);
+router.get('/update/:product_id', productsController.getUpdateProduct);
 
 // /admin/add-product => POST
 router.post('/insert', [
@@ -29,12 +32,12 @@ router.post('/insert', [
     check('price').isFloat({ gt: 0 }).withMessage("greater than zero")
 ], productsController.postAddProduct);
 
-// router.post('/update', [
-//     check('product_id').not().isEmpty().withMessage("empty"),
-//     check('product_name').trim().isLength({ min: 1 }).withMessage("product name is required"),
-//     check('price').isFloat({ gt: 0 }).withMessage("greater than zero")
-// ], productsController.postUpdateProduct);
+router.post('/update', [
+    check('product_id').not().isEmpty().withMessage("empty"),
+    check('product_name').trim().isLength({ min: 1 }).withMessage("product name is required"),
+    check('price').isFloat({ gt: 0 }).withMessage("greater than zero")
+], productsController.postUpdateProduct);
 
-// router.get('/delete/:product_id', productsController.getDeleteProduct);
+router.get('/delete/:product_id', productsController.getDeleteProduct);
 
 exports.routes = router;
