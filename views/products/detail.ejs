@@ -1,3 +1,9 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Mitr&display=swap');
+    .newfont {
+        font-family: 'Mitr', sans-serif;
+    }
+</style>
 <%- include('../includes/head.ejs') %> <%- include('../includes/menu.ejs')%>
 
 <div class="product-big-title-area">
@@ -19,8 +25,11 @@
           <div class="panel-body">
               <div class="col-md-6">
                   <div class="pro-img-details"> <br>
-                      <img src="https://www.bnn.in.th/pub/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/A/p/Apple-iPhone-12-Mini-Black-1-1617467336.jpg"  alt="">
+                    <img src="<%- img_path%>"  alt="">
+                 
+                    <!-- <img src="https://www.bnn.in.th/pub/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/A/p/Apple-iPhone-12-Mini-Black-1-1617467336.jpg"  alt=""> -->
                   </div>
+                  <!-- <%- img_path%> -->
                   <div class="pro-img-list">
                       <a href="#">
                           <img src="https://cima-afrique.org/cima/images/not-available.png"width="115px" height="100px" alt="">
@@ -39,17 +48,19 @@
               </div>
               <div class="col-md-6">
                   <br>
-                  <h2>
-                         APPLE IPHONE 12 128 GB BLACK
-                  </h2>
-                  <p>
-                      Praesent ac condimentum felis. Nulla at nisl orci, at dignissim dolor, The best product descriptions address your ideal buyer directly and personally. The best product descriptions address your ideal buyer directly and personally.
+                  <h2 class="newfont">
+                        <%- product_name%> 
+                  </h2><hr>
+                  <p class="newfont">
+                    <%- description%> 
+                    <!-- <%- category_name%>  -->
                   </p>
                   <div class="product_meta">
-                      <span class="posted_in"> <strong>Categories:</strong> <a rel="tag" href="#">Jackets</a>, <a rel="tag" href="#">Men</a>, <a rel="tag" href="#">Shirts</a>, <a rel="tag" href="#">T-shirt</a>.</span>
-                      <span class="tagged_as"><strong>Tags:</strong> <a rel="tag" href="#">mens</a>, <a rel="tag" href="#">womens</a>.</span>
+                       
+                      <span class="posted_in"> <strong class="newfont">Categories : <%- category_name%></strong>   </span>
+                      <span class="tagged_as"><strong class="newfont">Tags : </strong> <a class="newfont"rel="tag" href="#">APPLE</a>, <a rel="tag" href="#">UNISEX</a>.</span>
                   </div>
-                  <div class="m-bot15"> <strong>Price : </strong> <span class="amount-old">$544</span>  <span class="pro-price"> $300.00</span></div>
+                  <div class="m-bot15"> <strong class="newfont">Price : </strong>   <span class="pro-price" class="newfont"> ฿ <%- price%> </span></div>
                   <br>
                 <div class="quantity quantitys">
                     <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
@@ -211,7 +222,7 @@ body{margin-top:20px;
         margin-bottom: 10px;
     }
     .product_meta a, .pro-price{
-        color:#fc5959 ;
+        color:green ;
     }
     
     .pro-price, .amount-old {

@@ -5,7 +5,7 @@ const router = express.Router();
 
 const productsController = require('../controllers/product');
 
-router.get('/', productsController.index);
+router.get('/', productsController.getSearchProduct_homepage);
 
 // router.get('/shop', productsController.shopPage);
 
@@ -16,7 +16,7 @@ router.get('/computer', productsController.getSearchProductByComputer);
 router.get('/smartphone', productsController.getSearchProductByPhone);
 router.get('/laptop', productsController.getSearchProductByLaptop);
 
-router.get('/detail', productsController.details);
+router.get('/:product_id', productsController.detailProduct);
 
 
 // router.get('/insert', productsController.getAddProduct);

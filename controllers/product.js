@@ -7,11 +7,11 @@ const ObjectId = mongodb.ObjectId;
 
 
 
-exports.index = (req, res, next) => {
-    res.render('index', {
-        pageTitle: '',
-    });
-}
+// exports.index = (req, res, next) => {
+//     res.render('index', {
+//         pageTitle: '',
+//     });
+// }
 
 exports.shopPage = (req, res, next) => {
     res.render('products/shop', {
@@ -23,18 +23,26 @@ exports.insert = (req, res, next) => {
         pageTitle: '',
     });
 }
-exports.details = (req, res, next) => {
-    res.render('products/detail', {
-        pageTitle: '',
-    });
+// exports.details = (req, res, next) => {
+//     res.render('products/detail', {
+//         pageTitle: '',
+//     });
+// }
+exports.getSearchProduct_homepage = (req, res, next) => {
+   
+    Product.fetchAll()
+        .then(products => { 
+            res.render('index', {
+                pageTitle: 'Search phone',
+                prods: products,
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
 }
 
-
 exports.getSearchProductByPhone = (req, res, next) => {
-
-    // category_name:"phone",
-
-
 
     Product.fetchAllByPhone()
         .then(products => { 
@@ -100,6 +108,40 @@ exports.getSearchProduct = (req, res, next) => {
 //             console.log(err);
 //         });
 // }
+
+exports.detailProduct = (req, res, next) => {
+    console.log(req.params);
+    const { product_id } = req.params;
+    let product_name = '';
+    let price = '';
+    let description = '';
+    let img_path = '';
+    let category_name = '';
+
+    Product.findById(product_id)
+        .then(product => {
+            // console.log(product);
+            product_name = product.product_name;
+            price = product.price;
+            description = product.description;
+            img_path = product.img_path;
+            category_name = product.category_name;
+
+            res.render('products/detail', {
+                errorMessage: null,
+                product_id: product_id,
+                product_name: product_name,
+                price: price,
+                // amount:amount,
+                category_name:category_name,
+                img_path:img_path,
+                description:description
+                
+            });
+            console.log(category_name);
+        })
+        .catch(err => console.log(err));
+};
 
 exports.getAddProduct = (req, res, next) => {
     const product_name = '';

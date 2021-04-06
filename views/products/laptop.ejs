@@ -1,3 +1,9 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Mitr&display=swap');
+    .newfont {
+        font-family: 'Mitr', sans-serif;
+    }
+</style>
 <%- include('../includes/head.ejs') %> <%- include('../includes/menu.ejs')%>
 
 <div class="product-big-title-area">
@@ -23,11 +29,16 @@
                     <div class="product-upper">
                         <img src="<%- product.img_path%>" alt="" />
                     </div>
-                    <a href="/detail">
-                        <h2><%- product.product_name%></h2>
-                    </a>
+                    <form action="" method="get">
+                        <!-- <input type="hidden" id="product_id" name="product_id" value="<%= product._id %>"> -->
+                        <a href="<%- '/'+product._id%>"">
+                            <h2 class="newfont"><%- product.product_name%></h2>
+                        </a>
+                    </form>
+
                     <div class="product-carousel-price">
                         <!-- <ins>$899.00</ins> -->
+                        
                         <ins>฿ <%- product.price%>.00</ins> 
                         <del>฿ 999,000.00</del> 
                         <!-- <%- product.price%> -->

@@ -40,7 +40,7 @@ class Products {
             .find()
             .toArray()
             .then(products => {
-                console.log(products);
+                // console.log(products);
                 return products;
             })
             .catch(err => {
@@ -54,7 +54,7 @@ class Products {
             .find({category_name:"phone"})
             .toArray()
             .then(products => {
-                console.log(products);
+                // console.log(products);
                 return products;
             })
             .catch(err => {
@@ -68,7 +68,7 @@ class Products {
             .find({category_name:"computer"})
             .toArray()
             .then(products => {
-                console.log(products);
+                // console.log(products);
                 return products;
             })
             .catch(err => {
@@ -82,10 +82,10 @@ class Products {
             .find({category_name:"laptop"})
             .toArray()
             .then(products => {
-                console.log(products);
+                // console.log(products);
                 return products;
             })
-            .catch(err => {
+            .catch(err => {w
                 console.log(err);
             });
     }
@@ -96,7 +96,7 @@ class Products {
             .find({ _id: new mongodb.ObjectId(prodId) })
             .next()
             .then(product => {
-                console.log(product);
+                // console.log(product);
                 return product;
             })
             .catch(err => {
