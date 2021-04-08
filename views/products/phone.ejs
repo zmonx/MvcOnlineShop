@@ -31,7 +31,7 @@
                     </div>
                     <form action="" method="get">
                         <!-- <input type="hidden" id="product_id" name="product_id" value="<%= product._id %>"> -->
-                        <a href="/<%- product._id%>">
+                        <a href="/productDetail/<%- product._id%>">
                             <h2 class="newfont"><%- product.product_name%></h2>
                         </a>
                     </form>
@@ -44,9 +44,15 @@
                         <!-- <%- product.price%> -->
                     </div>
 
-                    <div class="product-option-shop">
-                        <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                    </div>
+                    <form method="POST">
+                        <input type="hidden" name="product_name" value="<%- product.product_name%>">
+                        <input type="hidden" name="price" value="<%- product.price%>">
+                        <input type="hidden" name="quantity" value="1">
+                        <input type="hidden" name="img_path" value="<%- product.img_path%>">
+            <div class="product-option-shop">
+                <button class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" type="submit">Add to cart</button>
+            </div>
+        </form>
                 </div>
             </div>
             <% }) %> 

@@ -153,13 +153,13 @@ exports.getSearchProduct = (req, res, next) => {
 // }
 
 exports.detailProduct = (req, res, next) => {
-    console.log(req.params);    
     const { product_id } = req.params;
-    let product_name = '';
-    let price = '';
-    let description = '';
-    let img_path = '';
-    let category_name = '';
+    console.log(product_id);    
+    // let product_name = '';
+    // let price = '';
+    // let description = '';
+    // let img_path = '';
+    // let category_name = '';
 
     Product.findById(product_id)
         .then(product => {
@@ -169,6 +169,7 @@ exports.detailProduct = (req, res, next) => {
             description = product.description;
             img_path = product.img_path;
             category_name = product.category_name;
+            console.log(category_name);
 
             res.render('products/detail', {
                 errorMessage: null,
@@ -180,7 +181,6 @@ exports.detailProduct = (req, res, next) => {
                 description: description
 
             });
-            console.log(category_name);
         })
         .catch(err => console.log(err));
 };
@@ -195,34 +195,35 @@ exports.getAddProduct = (req, res, next) => {
     res.render('insert', {
         pageTitle: 'Insert Product',
         errorMessage: null,
+        // product_id: product_id,
+        category_name: category_name,
         product_name: product_name,
         price: price,
         amount: amount,
-        category_name: category_name,
-        img_path: img_path,
-        description: description
+        description: description,
+        img_path: img_path
     });
 };
 
 exports.postAddProduct = (req, res, next) => {
     console.log(req.body);
-    const { product_name, price, amount, img_path, category_name, description } = req.body;
+    const { category_name, product_name, price, amount ,  description , img_path } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.render('insert', {
             pageTitle: 'Insert Product',
             errorMessage: errors.array(),
+            category_name: category_name,
             product_name: product_name,
             price: price,
             amount: amount,
-            category_name: category_name,
-            img_path: img_path,
-            description: description
+            description: description,
+            img_path: img_path
 
         });
     }
 
-    const product = new Product(product_name, price, amount, img_path, category_name, description);
+    const product = new Product(category_name, product_name,price, amount , description , img_path);
     product
         .save()
         .then(result => {
@@ -246,7 +247,6 @@ exports.getAddtoCart = (req, res, next) => {
     const price = '';
     const quantity = '';
     const img_path = '';
-    
     res.render('products/shop', {
         pageTitle: 'Insert cart',
         errorMessage: null,
@@ -260,18 +260,6 @@ exports.getAddtoCart = (req, res, next) => {
 exports.postAddtoCart = (req, res, next) => {
     console.log(req.body);
     const { product_name, price, quantity, img_path} = req.body;
-    // conEmpty()) {
-    //     res.render('produst errors = validationResult(req);
-    // if (!errors.iscts/shop', {
-    //         pageTitle: 'Insert cart',
-    //         errorMessage: errors.array(),
-    //         product_name: product_name,
-    //         price: price,
-    //         quantity: quantity,
-    //         img_path: img_path,
-
-    //     });
-    // }
 
     const cart = new Cart(product_name, price, quantity, img_path);
     cart
@@ -288,40 +276,29 @@ exports.postAddtoCart = (req, res, next) => {
 };
 
 
-
-
-
-
-
 exports.getUpdateProduct = (req, res, next) => {
     console.log(req.params);
     const { product_id } = req.params;
-    let product_name = '';
-    let price = '';
-    let amount = '';
-    let category_name = '';
-    let img_path = '';
-    let description = '';
 
     Product.findById(product_id)
         .then(product => {
             console.log(product);
+            category_name = product.category_name;
             product_name = product.product_name;
             price = product.price;
             amount = product.amount;
-            category_name = product.category_name;
             description = product.description;
             img_path = product.img_path;
             res.render('products/update', {
                 pageTitle: 'Update Product',
                 errorMessage: null,
                 product_id: product_id,
+                category_name: category_name,
                 product_name: product_name,
                 price: price,
                 amount: amount,
-                category_name: category_name,
-                img_path: img_path,
-                description: description
+                description: description,
+                img_path: img_path
             });
         })
         .catch(err => console.log(err));
@@ -329,23 +306,10 @@ exports.getUpdateProduct = (req, res, next) => {
 
 exports.postUpdateProduct = (req, res, next) => {
     console.log(req.body);
-    const { product_id, product_name, price, amount, img_path, category_name, description } = req.body;
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        res.render('products/update', {
-            pageTitle: 'Update Product',
-            errorMessage: errors.array(),
-            product_id: product_id,
-            product_name: product_name,
-            price: price,
-            amount: amount,
-            category_name: category_name,
-            img_path: img_path,
-            description: description
-        });
-    }
+    const { product_id, category_name, product_name,  price , amount,  description , img_path } = req.body;
 
-    const product = new Product(product_name, price, amount, img_path, category_name, description, new ObjectId(product_id));
+
+    const product = new Product(category_name, product_name,  price , amount ,  description , img_path, new ObjectId(product_id));
     product
         .save()
         .then(result => {

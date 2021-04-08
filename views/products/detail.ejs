@@ -65,9 +65,15 @@
                 <div class="quantity quantitys">
                     <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
                 </div>
+                <form method="POST">
+                    <input type="hidden" name="product_name" value="<%- product_name%>">
+                    <input type="hidden" name="price" value="<%- price%>">
+                    <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" name="img_path" value="<%-img_path%>">
                   <p>
-                      <button class="btn btn-round btn-new" type="button"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                      <button class="btn btn-round btn-new" type="submit"><i class="fa fa-shopping-cart"></i>  Add Cart</button>
                   </p>
+                </form>
               </div>
           </div>
       </section>

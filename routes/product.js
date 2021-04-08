@@ -21,7 +21,12 @@ router.get('/product', productsController.getSearchProduct_edit);
 // router.get('/update', productsController.update);
 
 
-// router.get('/:product_id', productsController.detailProduct);
+router.get('/productDetail/:product_id', productsController.detailProduct);
+router.post('/productDetail/:product_id', productsController.postAddtoCart);
+router.post('/laptop', productsController.postAddtoCart);
+router.post('/smartphone', productsController.postAddtoCart);
+router.post('/computer', productsController.postAddtoCart);
+
 
 router.get('/cart', productsController.cartPage);
 
@@ -43,6 +48,7 @@ router.get('/delete/:product_id', productsController.getDeleteProduct);
 router.get('/del/:cart_id', productsController.getDeleteCart);
 
 router.post('/shop', productsController.postAddtoCart);
+
 
 
 exports.routes = router;
