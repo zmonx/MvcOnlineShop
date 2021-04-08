@@ -2,14 +2,14 @@ const mongodb = require('mongodb');
 const getDb = require('../util/database').getDb;
 
 class Products {
-    constructor(product_name, price, amount,img_path ,category_name,description,id) {
+    constructor(id,product_name,category_name, price, amount,img_path ,description) {
+        this._id = id;
         this.category_name = category_name;
         this.product_name = product_name;
-        this.amount = amount;
         this.price = price;
+        this.amount = amount;
         this.img_path = img_path;
         this.description = description;
-        this._id = id;
     }
 
     save() {
@@ -85,11 +85,13 @@ class Products {
                 // console.log(products);
                 return products;
             })
-            .catch(err => {w
+            .catch(err => {
                 console.log(err);
             });
     }
     static findById(prodId) {
+        
+
         const db = getDb();
         return db
             .collection('products')
@@ -114,8 +116,9 @@ class Products {
             })
             .catch(err => {
                 console.log(err);
-            });
+            }); 
     }
+    
 }
 
 module.exports = Products;

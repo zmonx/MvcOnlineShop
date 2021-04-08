@@ -5,6 +5,7 @@ const router = express.Router();
 
 const productsController = require('../controllers/product');
 
+
 router.get('/', productsController.getSearchProduct_homepage);
 
 // router.get('/shop', productsController.shopPage);
@@ -16,13 +17,13 @@ router.get('/computer', productsController.getSearchProductByComputer);
 router.get('/smartphone', productsController.getSearchProductByPhone);
 router.get('/laptop', productsController.getSearchProductByLaptop);
 router.get('/product', productsController.getSearchProduct_edit);
+// router.get('/product/:product_id', productsController.getSearchProduct_edit);
 // router.get('/update', productsController.update);
 
 
-router.get('/:product_id', productsController.detailProduct);
+// router.get('/:product_id', productsController.detailProduct);
 
-
-// router.get('/insert', productsController.getAddProduct);
+router.get('/cart', productsController.cartPage);
 
 router.get('/update/:product_id', productsController.getUpdateProduct);
 
@@ -39,5 +40,9 @@ router.post('/update', [
 ], productsController.postUpdateProduct);
 
 router.get('/delete/:product_id', productsController.getDeleteProduct);
+router.get('/del/:cart_id', productsController.getDeleteCart);
+
+router.post('/shop', productsController.postAddtoCart);
+
 
 exports.routes = router;

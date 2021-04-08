@@ -16,37 +16,50 @@
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">
+            
+            
             <% if (prods.length > 0) { %> 
                 <% prods.map((product, index) => { %>
-            <div class="col-md-3 col-sm-6">
-                <div class="single-shop-product">
-                    <div class="product-upper">
-                        <img src="<%- product.img_path%>" alt="" />
-                    </div>
-                    <form action="" method="get">
-                        <!-- <input type="hidden" id="product_id" name="product_id" value="<%= product._id %>"> -->
-                        <a href="<%- '/'+product._id%>"">
-                            <h2 class="newfont"><%- product.product_name%></h2>
-                        </a>
-                    </form>
-
-                    <div class="product-carousel-price">
-                        <!-- <ins>$899.00</ins> -->
-                        
-                        <ins>฿ <%- product.price%>.00</ins> 
-                        <del>฿ 999,000.00</del> 
-                        <!-- <%- product.price%> -->
-                    </div>
-
+                    <div class="col-md-3 col-sm-6">
+                        <div class="single-shop-product">
+                            <div class="product-upper">
+                                
+                                <img src="<%- product.img_path%>" alt="" />
+                                
+                                
+                                
+                            </div>
+                            <form action="" method="get">
+                                <!-- <input type="hidden" id="product_id" name="product_id" value="<%= product._id %>"> -->
+                                <a href="<%- '/'+product._id%>"">
+                                    <h2 class="newfont" ><%- product.product_name%></h2>
+                                </a>
+                            </form>
+                            
+                            <div class="product-carousel-price">
+                                <!-- <ins>$899.00</ins> -->
+                                
+                                <ins >฿ <%- product.price%>.00</ins> 
+                                
+                                <del>฿ 999,000.00</del> 
+                                <!-- <%- product.price%> -->
+                            </div>
+                            <form method="POST">
+                                <input type="hidden" name="product_name" value="<%- product.product_name%>">
+                                <input type="hidden" name="price" value="<%- product.price%>">
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="img_path" value="<%- product.img_path%>">
                     <div class="product-option-shop">
-                        <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+                        <button class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" type="submit">Add to cart</button>
                     </div>
+                </form>
+
                 </div>
             </div>
             <% }) %> 
             <% } else   { %>
-            <h1>No Products Found!</h1>
-            <% } %>
+                <h1>No Products Found!</h1>
+                <% } %>
         </div>
 
         <div class="row">

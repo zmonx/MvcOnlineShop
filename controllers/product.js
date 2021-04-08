@@ -2,6 +2,8 @@ const { validationResult } = require('express-validator')
 
 const mongodb = require('mongodb');
 const Product = require('../models/products');
+const Cart = require('../models/cart');
+
 
 const ObjectId = mongodb.ObjectId;
 
@@ -19,6 +21,9 @@ exports.shopPage = (req, res, next) => {
     });
 }
 
+
+
+
 exports.updatePage = (req, res, next) => {
     res.render('products/update', {
         pageTitle: '',
@@ -35,9 +40,9 @@ exports.insert = (req, res, next) => {
 //     });
 // }
 exports.getSearchProduct_edit = (req, res, next) => {
-   
+
     Product.fetchAll()
-        .then(products => { 
+        .then(products => {
             res.render('products/product', {
                 pageTitle: 'Search phone',
                 prods: products,
@@ -48,10 +53,28 @@ exports.getSearchProduct_edit = (req, res, next) => {
         });
 }
 
+
+exports.cartPage = (req, res, next) => {
+
+    Cart.fetchAll()
+        .then(cart => {
+            res.render('products/cart', {
+                pageTitle: 'Cart',
+                prods: cart,
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
+
+
+
 exports.getSearchProduct_homepage = (req, res, next) => {
-   
+
     Product.fetchAll()
-        .then(products => { 
+        .then(products => {
             res.render('index', {
                 pageTitle: 'Search phone',
                 prods: products,
@@ -65,7 +88,7 @@ exports.getSearchProduct_homepage = (req, res, next) => {
 exports.getSearchProductByPhone = (req, res, next) => {
 
     Product.fetchAllByPhone()
-        .then(products => { 
+        .then(products => {
             res.render('products/phone', {
                 pageTitle: 'Search phone',
                 prods: products,
@@ -130,7 +153,7 @@ exports.getSearchProduct = (req, res, next) => {
 // }
 
 exports.detailProduct = (req, res, next) => {
-    console.log(req.params);
+    console.log(req.params);    
     const { product_id } = req.params;
     let product_name = '';
     let price = '';
@@ -149,14 +172,13 @@ exports.detailProduct = (req, res, next) => {
 
             res.render('products/detail', {
                 errorMessage: null,
-                product_id: product_id,
+                // product_id: product_id,
                 product_name: product_name,
                 price: price,
-                // amount:amount,
-                category_name:category_name,
-                img_path:img_path,
-                description:description
-                
+                category_name: category_name,
+                img_path: img_path,
+                description: description
+
             });
             console.log(category_name);
         })
@@ -175,16 +197,16 @@ exports.getAddProduct = (req, res, next) => {
         errorMessage: null,
         product_name: product_name,
         price: price,
-        amount:amount,
-        category_name:category_name,
-        img_path:img_path,
-        description:description
+        amount: amount,
+        category_name: category_name,
+        img_path: img_path,
+        description: description
     });
 };
 
 exports.postAddProduct = (req, res, next) => {
     console.log(req.body);
-    const { product_name,price,amount,img_path,category_name,description} = req.body;
+    const { product_name, price, amount, img_path, category_name, description } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.render('insert', {
@@ -192,15 +214,15 @@ exports.postAddProduct = (req, res, next) => {
             errorMessage: errors.array(),
             product_name: product_name,
             price: price,
-            amount:amount,
-            category_name:category_name,
-            img_path:img_path,
-            description:description
+            amount: amount,
+            category_name: category_name,
+            img_path: img_path,
+            description: description
 
         });
     }
 
-    const product = new Product(product_name,price,amount,img_path,category_name,description);
+    const product = new Product(product_name, price, amount, img_path, category_name, description);
     product
         .save()
         .then(result => {
@@ -213,6 +235,63 @@ exports.postAddProduct = (req, res, next) => {
         });
 
 };
+
+
+
+
+
+
+exports.getAddtoCart = (req, res, next) => {
+    const product_name = '';
+    const price = '';
+    const quantity = '';
+    const img_path = '';
+    
+    res.render('products/shop', {
+        pageTitle: 'Insert cart',
+        errorMessage: null,
+        product_name: product_name,
+        price: price,
+        quantity: quantity,
+        img_path: img_path,
+    });
+};
+
+exports.postAddtoCart = (req, res, next) => {
+    console.log(req.body);
+    const { product_name, price, quantity, img_path} = req.body;
+    // conEmpty()) {
+    //     res.render('produst errors = validationResult(req);
+    // if (!errors.iscts/shop', {
+    //         pageTitle: 'Insert cart',
+    //         errorMessage: errors.array(),
+    //         product_name: product_name,
+    //         price: price,
+    //         quantity: quantity,
+    //         img_path: img_path,
+
+    //     });
+    // }
+
+    const cart = new Cart(product_name, price, quantity, img_path);
+    cart
+        .save_cart()
+        .then(result => {
+            // console.log(result);
+            console.log('Created cart');
+            res.redirect('/shop');
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+};
+
+
+
+
+
+
 
 exports.getUpdateProduct = (req, res, next) => {
     console.log(req.params);
@@ -239,10 +318,10 @@ exports.getUpdateProduct = (req, res, next) => {
                 product_id: product_id,
                 product_name: product_name,
                 price: price,
-                amount:amount,
-                category_name:category_name,
-                img_path:img_path,
-                description:description
+                amount: amount,
+                category_name: category_name,
+                img_path: img_path,
+                description: description
             });
         })
         .catch(err => console.log(err));
@@ -250,7 +329,7 @@ exports.getUpdateProduct = (req, res, next) => {
 
 exports.postUpdateProduct = (req, res, next) => {
     console.log(req.body);
-    const { product_id,product_name,price,amount,img_path,category_name,description } = req.body;
+    const { product_id, product_name, price, amount, img_path, category_name, description } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.render('products/update', {
@@ -259,14 +338,14 @@ exports.postUpdateProduct = (req, res, next) => {
             product_id: product_id,
             product_name: product_name,
             price: price,
-            // amount:amount,
-            // category_name:category_name,
-            // img_path:img_path,
-            // description:description
+            amount: amount,
+            category_name: category_name,
+            img_path: img_path,
+            description: description
         });
     }
 
-    const product = new Product(product_name,price,amount,img_path,category_name,description, new ObjectId(product_id));
+    const product = new Product(product_name, price, amount, img_path, category_name, description, new ObjectId(product_id));
     product
         .save()
         .then(result => {
@@ -282,7 +361,18 @@ exports.getDeleteProduct = (req, res, next) => {
     Product.deleteById(product_id)
         .then(() => {
             console.log('Delete Product');
-            res.redirect('/product'); 
+            res.redirect('/product');
+        })
+        .catch(err => console.log(err));
+};
+
+exports.getDeleteCart = (req, res, next) => {
+    const { cart_id } = req.params;
+    console.log(cart_id);
+    Cart.deleteByIds(cart_id)
+        .then(() => {
+            console.log('Delete Product');
+            res.redirect('/cart');
         })
         .catch(err => console.log(err));
 };
